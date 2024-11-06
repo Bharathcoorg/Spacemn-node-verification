@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@thirdweb-dev/react": "^4.0.99",
+    "@thirdweb-dev/react": "^4.9.4",
     "@thirdweb-dev/sdk": "^4.0.99",
     "process": "^0.11.10",
     "react": "^18.2.0",
