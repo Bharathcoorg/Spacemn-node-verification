@@ -14,6 +14,7 @@ module.exports = {
         process: require.resolve('process/browser'),
         stream: require.resolve('stream-browserify'),
         url: require.resolve('url'),
+        zlib: require.resolve('browserify-zlib')
       };
 
       webpackConfig.plugins.push(
@@ -23,7 +24,6 @@ module.exports = {
         })
       );
 
-      // Add this new rule
       webpackConfig.module.rules.push({
         test: /\.m?js/,
         resolve: {
