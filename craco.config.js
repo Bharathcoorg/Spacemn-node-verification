@@ -23,6 +23,14 @@ module.exports = {
         })
       );
 
+      // Add this new rule
+      webpackConfig.module.rules.push({
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      });
+
       return webpackConfig;
     },
   },
