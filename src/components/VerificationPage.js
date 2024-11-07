@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useAddress, useDisconnect, useMetamask, useWalletConnect, useWalletSignMessage } from "@thirdweb-dev/react";
+import { useAddress, useDisconnect, useMetamask, useWalletConnect, useSDK } from "@thirdweb-dev/react";
 
 function VerificationPage() {
   const address = useAddress();
   const disconnect = useDisconnect();
   const connectWithMetamask = useMetamask();
   const connectWithWalletConnect = useWalletConnect();
-  const { signMessage } = useWalletSignMessage();
+  const sdk = useSDK();
   
   const [token, setToken] = useState('');
   const [status, setStatus] = useState('');
@@ -23,7 +23,7 @@ function VerificationPage() {
   }, []);
 
   const verifyNFT = async () => {
-    if (!address) {
+    if (!address || !sdk) {
       setStatus('Please connect your wallet first.');
       return;
     }
@@ -31,7 +31,7 @@ function VerificationPage() {
     try {
       setStatus('Signing message...');
       const message = `Verify SpaceM Node ownership. Token: ${token}`;
-      const signature = await signMessage({ message });
+      const signature = await sdk.wallet.sign(message);
 
       setStatus('Verifying...');
       const response = await fetch(`${process.env.REACT_APP_WORKER_URL}/submit-verification`, {
