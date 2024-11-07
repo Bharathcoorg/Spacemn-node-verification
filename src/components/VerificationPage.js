@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useAddress, useDisconnect, useMetamask, useWalletConnect, useSDK } from "@thirdweb-dev/react";
+import { useAddress, useDisconnect, useSDK, ConnectWallet } from "@thirdweb-dev/react";
 
 function VerificationPage() {
   const address = useAddress();
   const disconnect = useDisconnect();
-  const connectWithMetamask = useMetamask();
-  const connectWithWalletConnect = useWalletConnect();
   const sdk = useSDK();
   
   const [token, setToken] = useState('');
@@ -79,10 +77,10 @@ function VerificationPage() {
     <div style={styles.container}>
       <h1 style={styles.title}>Verify SpaceM Node NFT Ownership</h1>
       {!address ? (
-        <>
-          <button style={styles.button} onClick={connectWithMetamask}>Connect with MetaMask</button>
-          <button style={styles.button} onClick={connectWithWalletConnect}>Connect with WalletConnect</button>
-        </>
+        <ConnectWallet 
+          theme="dark"
+          btnTitle="Connect Wallet"
+        />
       ) : (
         <>
           <p>Connected: {address}</p>
